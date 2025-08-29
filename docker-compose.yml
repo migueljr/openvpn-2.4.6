@@ -13,7 +13,6 @@ services:
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
     ports:
       - 1194:1194/udp
-      - 5001:8080
     cap_add:
       - NET_ADMIN
     # sysctls for the container if it is not set on the host. See: https://docs.docker.com/compose/compose-file/compose-file-v2/#sysctls
