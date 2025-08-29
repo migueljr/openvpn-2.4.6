@@ -24,6 +24,15 @@ if [ "$#" -eq 0 ]; then
     if [ ! -c /dev/net/tun ]; then
         mknod /dev/net/tun c 10 200
     fi
+    
+    # Load necessary kernel modules for iptables
+    echo "Loading kernel modules for iptables"
+    modprobe ip_tables 2>/dev/null || true
+    modprobe iptable_filter 2>/dev/null || true
+    modprobe iptable_nat 2>/dev/null || true
+    modprobe nf_conntrack 2>/dev/null || true
+    modprobe nf_nat 2>/dev/null || true
+    
     if [ -f "$CUSTOM_FIREWALL_SCRIPT" ]; then
         echo "Executing custom firewall script: $CUSTOM_FIREWALL_SCRIPT"
         . "$CUSTOM_FIREWALL_SCRIPT"
