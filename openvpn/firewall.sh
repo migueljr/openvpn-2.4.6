@@ -1,17 +1,12 @@
 #!/bin/sh
-# Script de firewall personalizado para OpenVPN
+set -eu
 
-# Habilitar encaminhamento de pacotes no kernel
-echo 1 > /proc/sys/net/ipv4/ip_forward
+# This iptables script to controlling traffic in the openvpn tunnel.
+# In this example, clients can only perform DNS, HTTP and HTTPS requests to the world.
 
-# Permitir tráfego na interface tun0
-iptables -A INPUT -i tun0 -j ACCEPT
-iptables -A FORWARD -i tun0 -j ACCEPT
-iptables -A FORWARD -o tun0 -j ACCEPT
-
-# Permitir tráfego estabelecido e relacionado
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Registrar regras aplicadas
-echo "Regras de firewall personalizadas aplicadas com sucesso"
+# Drop everything by default from tunnel to world
+iptables -P FORWARD DROP
+# Allow DNS from tunnel to world
+iptables -A FORWARD -i tun+ -o "$NAT_INTERFACE" -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+# Allow HTTP and HTTPS from tunnel to world
+iptables -A FORWARD -i tun+ -o "$NAT_INTERFACE" -p tcp -m tcp -m conntrack --ctstate NEW -m multiport --dports 80,443 -j ACCEPT
