@@ -14,7 +14,7 @@ services:
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
     ports:
       - 1194:1194/udp
-      - 5001:5001  # Porta 5001 mapeada para o VPS
+      - 5001:5001  # Porta 5001 mapeada para o VPS (não mudada)
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -47,7 +47,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf  # Arquivo de configuração do Nginx
     ports:
-      - "5001:5001"  # Expondo a porta 5001 do Nginx para o VPS
+      - "5002:5001"  # Alterado de 5001 para 5002 para evitar conflito
     depends_on:
       - openvpn-server
     restart: unless-stopped
