@@ -1,0 +1,1 @@
+cp -r /usr/share/easy-rsa/ /etc/openvpn
