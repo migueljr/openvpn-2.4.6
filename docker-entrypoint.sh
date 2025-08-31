@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+#set -eu
 
 # Env vars
 OPENVPN_CONFIG_FILE=${OPENVPN_CONFIG_FILE:-/etc/openvpn/server.conf}
