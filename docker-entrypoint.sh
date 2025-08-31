@@ -68,10 +68,6 @@ if [ "$#" -eq 0 ]; then
     echo "Listing iptables NAT rules:"
     iptables -L -nv -t nat
 
-    # Iniciar o Nginx
-    echo "Starting Nginx"
-    nginx -g "daemon off;" &  # Nginx rodando em segundo plano
-
     # Gerar a linha de comando do OpenVPN. Consulte o manual do OpenVPN para mais detalhes.
     set openvpn --cd /etc/openvpn --config "$OPENVPN_CONFIG_FILE"
     echo "openvpn command line: $@"
