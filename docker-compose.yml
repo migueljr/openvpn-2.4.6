@@ -22,6 +22,8 @@ services:
       - net.ipv4.conf.all.forwarding=1
     devices:
      - /dev/net/tun:/dev/net/tun
+    networks:
+      - openvpn-network  # Conectando o openvpn-server à rede personalizada
     restart: unless-stopped
 
   openvpn-client:
@@ -40,6 +42,8 @@ services:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.forwarding=1
+    networks:
+      - openvpn-network  # Conectando o openvpn-client à rede personalizada
     restart: unless-stopped
 
   nginx:
@@ -47,7 +51,13 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf  # Arquivo de configuração do Nginx
     ports:
-      - "5002:5001"  # Alterado de 5001 para 5002 para evitar conflito
+      - "5002:5001"  # Porta 5002 do VPS mapeada para a porta 5001 do Nginx no container
     depends_on:
       - openvpn-server
+    networks:
+      - openvpn-network  # Conectando o Nginx à rede personalizada
     restart: unless-stopped
+
+networks:
+  openvpn-network:
+    driver: bridge  # Usando uma rede bridge personalizada
