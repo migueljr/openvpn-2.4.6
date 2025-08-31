@@ -8,7 +8,7 @@ services:
     environment:
       - OPENVPN_CONFIG_FILE=/etc/openvpn/server.conf
       - NAT_MASQUERADE=1
-      # - CUSTOM_FIREWALL_SCRIPT=/etc/openvpn/firewall.sh
+      - CUSTOM_FIREWALL_SCRIPT=/etc/openvpn/firewall.sh
     volumes:
       - ./openvpn/server.conf:/etc/openvpn/server.conf
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
@@ -32,7 +32,7 @@ services:
     environment:
       - OPENVPN_CONFIG_FILE=/etc/openvpn/client.conf
       - NAT_MASQUERADE=0
-      # - CUSTOM_FIREWALL_SCRIPT=/etc/openvpn/firewall.sh
+      - CUSTOM_FIREWALL_SCRIPT=/etc/openvpn/firewall.sh
     volumes:
       - ./openvpn/client.conf:/etc/openvpn/client.conf
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
