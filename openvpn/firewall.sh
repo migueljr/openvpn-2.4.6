@@ -23,3 +23,7 @@ iptables -P FORWARD DROP
 iptables -A FORWARD -i tun+ -o "$NAT_INTERFACE" -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 # Allow HTTP and HTTPS from tunnel to world
 iptables -A FORWARD -i tun+ -o "$NAT_INTERFACE" -p tcp -m tcp -m conntrack --ctstate NEW -m multiport --dports 80,443 -j ACCEPT
+# Allow HTTP from tunnel to any IP in the 10.8.0.0/24 subnet
+iptables -A FORWARD -i tun+ -d 10.8.0.0/24 -p tcp --dport 80 -j ACCEPT
+# Allow traffic between all VPN clients (optional)
+iptables -A FORWARD -i tun+ -o tun+ -j ACCEPT
