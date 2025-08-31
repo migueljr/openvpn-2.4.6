@@ -17,16 +17,6 @@ if [ -n "$OPENVPN_SERVER_CONFIG_FILE" ]; then
     OPENVPN_CONFIG_FILE="$OPENVPN_SERVER_CONFIG_FILE"
 fi
 
-# Garantir que os diretórios do nginx existam
-echo "Criando diretórios necessários para o nginx"
-mkdir -p /run/nginx /var/log/nginx /var/cache/nginx
-chown -R nginx:nginx /run/nginx /var/log/nginx /var/cache/nginx
-chmod 755 /run/nginx
-
-# Testar configuração do nginx
-echo "Testando configuração do nginx"
-nginx -t
-
 # If no args are passed, run the entrypoint. If a flag is passed, run openvpn directly. Else, run the passed command
 if [ "$#" -eq 0 ]; then
     # Provision
