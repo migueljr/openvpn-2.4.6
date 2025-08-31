@@ -12,6 +12,7 @@ services:
     volumes:
       - ./openvpn/server.conf:/etc/openvpn/server.conf
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
+      - ./openvpn/easyrsa:/etc/openvpn/easyrsa
     ports:
       - 1194:1194/udp
       - 5001:8080
