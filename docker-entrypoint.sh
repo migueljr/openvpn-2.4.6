@@ -69,6 +69,9 @@ if [ "$#" -eq 0 ]; then
     iptables -L -nv -t nat
 
     if command -v nginx >/dev/null 2>&1; then
+        echo "Preparando diretórios para o Nginx"
+        mkdir -p /run/nginx
+        
         echo "Listing nginx configuration:"
         nginx -t
         echo "Starting nginx"
