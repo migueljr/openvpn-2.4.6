@@ -12,6 +12,7 @@ services:
     volumes:
       - ./openvpn/server.conf:/etc/openvpn/server.conf
       - ./openvpn/firewall.sh:/etc/openvpn/firewall.sh
+      - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 1194:1194/udp
       - 5001:5001  # Porta 5001 mapeada para o VPS (não mudada)
