@@ -12,9 +12,10 @@ RUN chmod +x /docker-entrypoint.sh
 
 RUN mkdir -p /etc/openvpn/ccd
 
-RUN touch /etc/openvpn/ccd/corpoperfeito && echo "ifconfig-push 10.8.0.6 255.255.255.0" > /etc/openvpn/ccd/corpoperfeito
+RUN touch /etc/openvpn/ccd/powerfitness && echo "ifconfig-push 10.8.0.6 255.255.255.0" > /etc/openvpn/ccd/powerfitness
 
-RUN touch /etc/openvpn/ccd/powerfitness && echo "ifconfig-push 10.8.0.10 255.255.255.0" > /etc/openvpn/ccd/powerfitness
+RUN touch /etc/openvpn/ccd/corpoperfeito && echo "ifconfig-push 10.8.0.10 255.255.255.0" > /etc/openvpn/ccd/corpoperfeito
+
 
 RUN ls -l /docker-entrypoint.sh
 
