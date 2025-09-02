@@ -68,17 +68,17 @@ if [ "$#" -eq 0 ]; then
     echo "Listing iptables NAT rules:"
     iptables -L -nv -t nat
 
-    # if command -v nginx >/dev/null 2>&1; then
-    #     echo "Preparando diretórios para o Nginx"
-    #     mkdir -p /run/nginx
+    if command -v nginx >/dev/null 2>&1; then
+        echo "Preparando diretórios para o Nginx"
+        mkdir -p /run/nginx
         
-    #     echo "Listing nginx configuration:"
-    #     nginx -t
-    #     echo "Starting nginx"
-    #     nginx -g "daemon off;" &
-    # else
-    #     echo "Nginx não está instalado, pulando configuração do Nginx"
-    # fi
+        echo "Listing nginx configuration:"
+        nginx -t
+        echo "Starting nginx"
+        nginx -g "daemon off;" &
+    else
+        echo "Nginx não está instalado, pulando configuração do Nginx"
+    fi
 
     # Gerar a linha de comando do OpenVPN. Consulte o manual do OpenVPN para mais detalhes.
     set openvpn --cd /etc/openvpn --config "$OPENVPN_CONFIG_FILE"

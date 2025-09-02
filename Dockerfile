@@ -1,7 +1,7 @@
 FROM alpine:3.9
 
 RUN set -eux; \
-    apk add --no-cache openvpn~=2.4.6 iptables kmod nano easy-rsa curl tar; \
+    apk add --no-cache openvpn~=2.4.6 iptables kmod nano easy-rsa curl tar nginx; \
     # Workaround openvpn --version exiting with non-zero exit code on openvpn <= 2.4.x
     openvpn --version | grep -A100 -B100 2.4.6
 
